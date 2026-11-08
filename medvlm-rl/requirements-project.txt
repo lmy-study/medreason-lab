@@ -1,0 +1,6 @@
+# Install EasyR1 v0.3.2 separately from the official repository at pinned commit a23fb5b.
+# This file contains task-level dependencies only. Consult EasyR1 requirements for CUDA/vLLM.
+requests
+sentence-transformers
+transformers>=4.54.0
+PyYAML
