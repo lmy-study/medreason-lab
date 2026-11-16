@@ -133,3 +133,22 @@ See `reports/training/` for saved plots covering policy-gradient loss, policy en
 ## Third-party software and attribution
 
 The RL training infrastructure uses [EasyR1](https://github.com/hiyouga/EasyR1) and [veRL](https://github.com/volcengine/verl); This repository's organization, configuration and experiment artifacts are maintained as the MedVLM-RL project. Third-party copyright and license obligations remain applicable.
+
+
+## Model export and Agent-Swarm integration
+
+RL training is launched with `bash scripts/train_2b.sh`. The training configuration writes FSDP checkpoints under `checkpoints/medvlm_2b_dapo/`, with an Actor subdirectory at each retained training step. Optimizer and training state remain in `checkpoints/`, not in the deployable model directory.
+
+For an Actor checkpoint at `global_step_N/actor`, run from this project directory:
+
+```bash
+bash scripts/export_model.sh checkpoints/medvlm_2b_dapo/global_step_N/actor
+```
+
+The script invokes the repository's `model_merger.py` and copies the Hugging Face-format output into:
+
+```text
+models/MedReason-VL-2B-RL/
+```
+
+This model directory contains model weights and configuration and the compatible tokenizer/processor files required for inference. Keep it out of source control. The agent service is launched from `../medagent-swarm/scripts/serve_model.sh`. See the root README for the model/API boundary.

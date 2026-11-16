@@ -4,3 +4,15 @@ __pycache__/
 .env
 .venv/
 **/checkpoints/
+
+# Local weights, checkpoints and environment
+medvlm-rl/checkpoints/**
+!medvlm-rl/checkpoints/**/
+!medvlm-rl/checkpoints/**/.gitkeep
+medvlm-rl/models/MedReason-VL-2B-RL/**
+!medvlm-rl/models/MedReason-VL-2B-RL/.gitkeep
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/.DS_Store
+.env
